@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Displays movies in GridView
  */
 public class MainFragment extends Fragment {
-
 
     public MainFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,5 +24,4 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
-
 }
