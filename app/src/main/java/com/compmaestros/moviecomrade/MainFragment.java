@@ -70,12 +70,14 @@ public class MainFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        new FetchMoviesTask().execute();
+        new FetchMoviesTask().execute("1");
+        new FetchMoviesTask().execute("2");
+        new FetchMoviesTask().execute("3");
     }
 
-    public class FetchMoviesTask extends AsyncTask<Void, Void, List<String>> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, List<String>> {
         @Override
-        protected List<String> doInBackground(Void... params) {
+        protected List<String> doInBackground(String... pageNumber) {
             List<String> movieImageUrls = null;
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
@@ -86,7 +88,7 @@ public class MainFragment extends Fragment {
             String moviesJsonString = null;
 
             try {
-                URL url = new URL(buildAPIUrl());
+                URL url = new URL(buildAPIUrl(pageNumber[0]));
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -152,7 +154,7 @@ public class MainFragment extends Fragment {
         protected void onPostExecute(List<String> movieUrlList) {
             super.onPostExecute(movieUrlList);
             if(movieUrlList != null) {
-                movieAdapter.clear();
+//                movieAdapter.clear();
                 movieAdapter.addAll(movieUrlList);
             }
         }
@@ -198,13 +200,12 @@ public class MainFragment extends Fragment {
          * Possible parameters are available at theMovieDB API page, at
          * http://docs.themoviedb.apiary.io/#reference/discover/discovermovie
          * Example API calls:
-         * For popularity : http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key={API_KEY}
-         * For highest rating : http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key={API_KEY}
+         * For popularity : http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&api_key={API_KEY}
+         * For highest rating : http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&page=1&api_key={API_KEY}
          * @return Returns the string url.
+         * @param pageNumber is page query parameter used in API call
          */
-        private String buildAPIUrl() {
-            // TODO: /2/16 remove following example comment.
-            //String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
+        private String buildAPIUrl(String pageNumber) {
             Uri.Builder apiUriBuilder = new Uri.Builder();
             apiUriBuilder.scheme("http");
             apiUriBuilder.authority("api.themoviedb.org");
@@ -212,10 +213,9 @@ public class MainFragment extends Fragment {
             apiUriBuilder.appendPath("discover");
             apiUriBuilder.appendPath("movie");
             apiUriBuilder.appendQueryParameter("sort_by", "popularity.desc");
+            apiUriBuilder.appendQueryParameter("page", pageNumber);
             // Default mode should be json
             //apiUriBuilder.appendQueryParameter("mode", "json");
-            // API key must be stored as a system environment variable by name TMDB_KEY
-            // in your PC while compiling.
             apiUriBuilder.appendQueryParameter("api_key", BuildConfig.TMDB_API_KEY);
             return apiUriBuilder.build().toString();
         }
