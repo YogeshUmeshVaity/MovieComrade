@@ -67,6 +67,7 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    // TODO: 5/2/16 Can use ViewPager to display different pages instead of unlimited scroll
     @Override
     public void onStart() {
         super.onStart();
@@ -75,6 +76,7 @@ public class MainFragment extends Fragment {
         new FetchMoviesTask().execute("3");
     }
 
+    // TODO: 5/2/16 Add code to check if the internet connection is enabled. 
     public class FetchMoviesTask extends AsyncTask<String, Void, List<String>> {
         @Override
         protected List<String> doInBackground(String... pageNumber) {
