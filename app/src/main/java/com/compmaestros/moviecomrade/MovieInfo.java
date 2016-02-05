@@ -57,4 +57,11 @@ public class MovieInfo {
         return movieId;
     }
 
+    // Test this class
+    public static void main(String[] args) {
+        MovieInfo movieInfo = new MovieInfo("\\/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg", "281957");
+        System.out.println(movieInfo.getFullPosterPath());
+        System.out.println(movieInfo.getMovieId());
+    }
+
 }
