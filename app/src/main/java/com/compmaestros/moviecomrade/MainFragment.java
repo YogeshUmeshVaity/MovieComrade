@@ -166,7 +166,7 @@ public class MainFragment extends Fragment {
          * 
          * API response provides a relative path to a movie poster image e.g.
          * \/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
-         * Here you'll need trim the backward slash. So, resulting relative image path is
+         * Here you'll need to trim the backward slash. So, resulting relative image path is
          * /oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
          * After that, You need to prepend a base path to this relative path to build the complete url.
          * The base URL will look like: http://image.tmdb.org/t/p/
