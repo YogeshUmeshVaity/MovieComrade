@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         GridView movieGrids = (GridView) rootView.findViewById(R.id.movie_grid_view);
 
-        movieAdapter = new MovieAdapter(getActivity(), new ArrayList<String>());
+        movieAdapter = new MovieAdapter(getActivity(), new ArrayList<MovieInfo>());
         movieGrids.setAdapter(movieAdapter);
         movieGrids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
@@ -77,10 +77,10 @@ public class MainFragment extends Fragment {
     }
 
     // TODO: 5/2/16 Add code to check if the internet connection is enabled. 
-    public class FetchMoviesTask extends AsyncTask<String, Void, List<String>> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, List<MovieInfo>> {
         @Override
-        protected List<String> doInBackground(String... pageNumber) {
-            List<String> movieImageUrls = null;
+        protected List<MovieInfo> doInBackground(String... pageNumber) {
+            List<MovieInfo> movieInfoObjects = null;
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -143,7 +143,7 @@ public class MainFragment extends Fragment {
             }
 
             try {
-                return getImageUrlsFromJson(moviesJsonString);
+                return getMovieObjectsFromJson(moviesJsonString);
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 e.printStackTrace();
@@ -153,48 +153,32 @@ public class MainFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(List<String> movieUrlList) {
-            super.onPostExecute(movieUrlList);
-            if(movieUrlList != null) {
+        protected void onPostExecute(List<MovieInfo> movieInfoObjects) {
+            super.onPostExecute(movieInfoObjects);
+            if(movieInfoObjects != null) {
 //                movieAdapter.clear();
-                movieAdapter.addAll(movieUrlList);
+                movieAdapter.addAll(movieInfoObjects);
             }
         }
 
         /**
          * Extracts the Image url from Json String.
-         * 
-         * API response provides a relative path to a movie poster image e.g.
-         * \/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
-         * Here you'll need to trim the backward slash. So, resulting relative image path is
-         * /oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
-         * After that, You need to prepend a base path to this relative path to build the complete url.
-         * The base URL will look like: http://image.tmdb.org/t/p/
-         * Then ‘size’, which will be one of the following: "w92", "w154", "w185", "w342", "w500",
-         * "w780", or "original". For most phones “w185” is recommended.
-         *
-         * So resulting example image url that should be in List is :
-         * http://image.tmdb.org/t/p/w185//oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
          *
          * @param moviesJsonString is String in Json format.
          * @return Returns complete image url ready to be used with Picasso.
          */
-        private List<String> getImageUrlsFromJson(String moviesJsonString) throws JSONException {
-            List<String> movieUrlList = new ArrayList<>();
-            // Base url + image size
-            final String baseUrl = "http://image.tmdb.org/t/p/w185/";
+        private List<MovieInfo> getMovieObjectsFromJson(String moviesJsonString) throws JSONException {
+            List<MovieInfo> movieObjectList = new ArrayList<>();
             JSONObject moviesJson = new JSONObject(moviesJsonString);
             // results is the name of an array in Json String
             JSONArray results = moviesJson.getJSONArray("results");
             for (int i = 0; i < results.length(); i++) {
                 JSONObject poster = results.getJSONObject(i);
-                String movieImageUrl = poster.getString("poster_path");
-                // Remove the backward slash at the start
-                movieImageUrl = movieImageUrl.substring(1);
-                movieImageUrl = baseUrl.concat(movieImageUrl);
-                movieUrlList.add(movieImageUrl);
+                String relativeImageUrl = poster.getString("poster_path");
+                String movieId = poster.getString("id");
+                movieObjectList.add(new MovieInfo(relativeImageUrl, movieId));
             }
-            return movieUrlList;
+            return movieObjectList;
         }
 
         /**

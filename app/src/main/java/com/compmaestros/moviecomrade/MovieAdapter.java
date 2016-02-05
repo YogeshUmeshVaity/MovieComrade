@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MovieAdapter extends ArrayAdapter<String> {
+public class MovieAdapter extends ArrayAdapter<MovieInfo> {
     private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
 
     /**
@@ -20,14 +20,14 @@ public class MovieAdapter extends ArrayAdapter<String> {
      * to populate into the lists
      *
      * @param context        The current context. Used to inflate the layout file.
-     * @param movieImageUrls A List of AndroidFlavor objects to display in a list
+     * @param movieInfoObjects A List of AndroidFlavor objects to display in a list
      */
-    public MovieAdapter(Activity context, List<String> movieImageUrls) {
+    public MovieAdapter(Activity context, List<MovieInfo> movieInfoObjects) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single ImageView.
         // Because this is a custom adapter for an ImageView, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
-        super(context, 0, movieImageUrls);
+        super(context, 0, movieInfoObjects);
     }
 
     /**
@@ -42,7 +42,7 @@ public class MovieAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Gets the movie image url from the ArrayAdapter at the appropriate position
-        String movieImageUrl = getItem(position);
+        MovieInfo movieInfoObject = getItem(position);
 
         // Adapters recycle views to AdapterViews.
         // If this is a new View object we're getting, then inflate the layout.
@@ -54,7 +54,7 @@ public class MovieAdapter extends ArrayAdapter<String> {
         }
 
         ImageView movieGrid = (ImageView) convertView.findViewById(R.id.grid_item_movie_image_view);
-        Picasso.with(getContext()).load(movieImageUrl).into(movieGrid);
+        Picasso.with(getContext()).load(movieInfoObject.getFullPosterPath()).into(movieGrid);
 
         return convertView;
     }
