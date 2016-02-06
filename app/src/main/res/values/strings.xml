@@ -1,5 +1,23 @@
 <resources>
+
     <string name="app_name">MovieComrade</string>
-    <string name="title_activity_settings">Settings</string>
+
+    <!-- Title for SettingsActivity [CHAR LIMIT=10] -->
+    <string name="activity_settings_title">Settings</string>
+
+    <!-- Title for Settings menu [CHAR LIMIT=10] -->
     <string name="action_settings_title">Settings</string>
+
+    <!-- Title for Sort By Setting [CHAR LIMIT=10] -->
+    <string name="pref_sort_by_title">Sort By</string>
+
+    <!-- Key for Sort by preference [CHAR LIMIT=10] -->
+    <string name="pref_sort_by_key" translatable="false">sort_by</string>
+
+    <!-- Entry for Popularity in entry array [CHAR LIMIT=10] -->
+    <string name="pref_popularity_entry">Popularity</string>
+
+    <!-- Entry for Highest Rated in entry array [CHAR LIMIT=10] -->
+    <string name="pref_highest_rated_entry">Highest Rated</string>
+
 </resources>

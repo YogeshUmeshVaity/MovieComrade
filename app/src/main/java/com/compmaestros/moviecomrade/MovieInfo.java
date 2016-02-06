@@ -63,5 +63,4 @@ public class MovieInfo {
         System.out.println(movieInfo.getFullPosterPath());
         System.out.println(movieInfo.getMovieId());
     }
-
 }
