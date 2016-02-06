@@ -4,13 +4,15 @@
 
     <!-- Required for the app to connect to the internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <!-- Using one of these themes prevents the app from using the native ActionBar class to
+    provide the app bar. -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

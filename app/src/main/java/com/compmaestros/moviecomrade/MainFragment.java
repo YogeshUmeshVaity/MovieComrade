@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,13 +47,19 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //setHasOptionsMenu(true);
-        //Log.e(LOG_TAG, movieImageUrls.toString());
+
+        setHasOptionsMenu(true);
+
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        // Setup toolbar
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.grids_fragment_toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+
+        GridView movieGrids = (GridView) rootView.findViewById(R.id.movie_grid_view);
         // Associate Adapter with GridView.
         // Adapter is backed by List of image urls of movies.
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        GridView movieGrids = (GridView) rootView.findViewById(R.id.movie_grid_view);
-
         movieAdapter = new MovieAdapter(getActivity(), new ArrayList<MovieInfo>());
         movieGrids.setAdapter(movieAdapter);
         movieGrids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
