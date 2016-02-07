@@ -29,12 +29,15 @@ public class SettingsFragment extends PreferenceFragment
             preference.setSummary(stringValue);
         }
 
-        return false;
+        // Don't forget to return true, when you add this method through
+        // template it's false by default. If false, the preferences won't be saved.
+        return true;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Load the preferences from the XML
         addPreferencesFromResource(R.xml.pref_general);
 
@@ -51,7 +54,8 @@ public class SettingsFragment extends PreferenceFragment
     private void bindPreferenceSummeryToValue(Preference preference) {
         preference.setOnPreferenceChangeListener(this);
 
-        // retrieve the string value of the preference
+        //You can make this one sentence for better performance
+        // Retrieve the string value of the preference
         Context preferenceContext = preference.getContext();
         SharedPreferences settings =
                 PreferenceManager.getDefaultSharedPreferences(preferenceContext);
@@ -60,8 +64,6 @@ public class SettingsFragment extends PreferenceFragment
 
         // Trigger the listener immediately with the preference's current value above.
         onPreferenceChange(preference, preferenceValue);
-
-
     }
 
 }
