@@ -2,7 +2,7 @@
 
     <string name="app_name">MovieComrade</string>
 
-    <!-- Title for SettingsActivity [CHAR LIMIT=10] -->
+    <!-- Title for SettingsFragment [CHAR LIMIT=10] -->
     <string name="activity_settings_title">Settings</string>
 
     <!-- Title for Settings menu [CHAR LIMIT=10] -->
@@ -19,5 +19,11 @@
 
     <!-- Entry for Highest Rated in entry array [CHAR LIMIT=10] -->
     <string name="pref_highest_rated_entry">Highest Rated</string>
+
+    <!-- Value for Popularity in values array [CHAR LIMIT=NONE] -->
+    <string name="pref_popularity_value" translatable="false">popularity</string>
+
+    <!-- Value for Highest Rated in values array [CHAR LIMIT=NONE] -->
+    <string name="pref_highest_rated_value" translatable="false">highest_rated</string>
 
 </resources>

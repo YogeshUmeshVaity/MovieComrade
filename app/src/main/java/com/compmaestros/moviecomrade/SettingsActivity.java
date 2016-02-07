@@ -1,14 +1,19 @@
 package com.compmaestros.moviecomrade;
 
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-
-public class SettingsActivity extends PreferenceActivity
-        implements Preference.OnPreferenceChangeListener {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+        if(savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_settings_activity, new SettingsFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

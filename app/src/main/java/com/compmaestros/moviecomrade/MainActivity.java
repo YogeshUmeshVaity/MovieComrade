@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_fragment_container, new MainFragment()).commit();
+                    .add(R.id.fragment_container_main_activity, new MainFragment()).commit();
         }
     }
 
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             // Launch Settings Activity
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
