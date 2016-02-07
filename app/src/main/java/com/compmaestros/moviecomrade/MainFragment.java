@@ -1,9 +1,11 @@
 package com.compmaestros.moviecomrade;
 
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -206,12 +208,20 @@ public class MainFragment extends Fragment {
             apiUriBuilder.appendPath("3");
             apiUriBuilder.appendPath("discover");
             apiUriBuilder.appendPath("movie");
-            apiUriBuilder.appendQueryParameter("sort_by", "popularity.desc");
+            apiUriBuilder.appendQueryParameter("sort_by", getSortBySetting());
             apiUriBuilder.appendQueryParameter("page", pageNumber);
             // Default mode should be json
             //apiUriBuilder.appendQueryParameter("mode", "json");
             apiUriBuilder.appendQueryParameter("api_key", BuildConfig.TMDB_API_KEY);
             return apiUriBuilder.build().toString();
+        }
+
+        private String getSortBySetting() {
+            SharedPreferences settings =
+                    PreferenceManager.getDefaultSharedPreferences(getContext());
+            return settings.getString(
+                    getString(R.string.pref_sort_by_key),
+                    getString(R.string.pref_sort_by_default));
         }
     }
 }
