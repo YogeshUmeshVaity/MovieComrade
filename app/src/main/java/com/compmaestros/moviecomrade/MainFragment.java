@@ -77,13 +77,20 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
-    // TODO: 5/2/16 Can use ViewPager to display different pages instead of unlimited scroll
+    // TODO: 5/2/16 Can use ViewPager to display different pages instead of unlimited scroll.
+    /** TODO: 9/2/16 Solve the following issue.
+     * If this call is put in the onStart(), the call will be made everytime, the
+     * activity is visible to the user, as a result there will be wasted calls to API.
+     * Check if the user really want to refresh the list. Something can be taken from
+     * savedInstanceState maybe. The current situation is right for if the user changes the
+     * Sort By setting, when the back button is pressed, the activity get's refreshed. So keep this
+     * in my while solving this issue.
+     */
     @Override
     public void onStart() {
         super.onStart();
+        // Call AsyncTask
         new FetchMoviesTask().execute("1");
-        new FetchMoviesTask().execute("2");
-        new FetchMoviesTask().execute("3");
     }
 
     // TODO: 5/2/16 Add code to check if the internet connection is enabled. 
@@ -166,7 +173,7 @@ public class MainFragment extends Fragment {
         protected void onPostExecute(List<MovieInfo> movieInfoObjects) {
             super.onPostExecute(movieInfoObjects);
             if(movieInfoObjects != null) {
-//                movieAdapter.clear();
+                movieAdapter.clear();
                 movieAdapter.addAll(movieInfoObjects);
             }
         }
