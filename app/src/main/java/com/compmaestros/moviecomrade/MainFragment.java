@@ -1,6 +1,7 @@
 package com.compmaestros.moviecomrade;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -8,14 +9,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,14 +67,18 @@ public class MainFragment extends Fragment {
         movieGrids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                // TODO:replace toast with activity launch intent
-                Toast.makeText(getContext(), "" + position,
-                        Toast.LENGTH_SHORT).show();
+                showMovieDetails();
             }
         });
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    /** Launches Details Activity to show details about the selected movie. */
+    private void showMovieDetails() {
+        Intent detailsIntent = new Intent(getActivity(), DetailsActivity.class);
+        startActivity(detailsIntent);
     }
 
     // TODO: 5/2/16 Can use ViewPager to display different pages instead of unlimited scroll.
