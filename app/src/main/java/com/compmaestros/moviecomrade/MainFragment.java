@@ -39,6 +39,7 @@ public class MainFragment extends Fragment {
 
 
     private static final String LOG_TAG = MainFragment.class.getSimpleName();
+    // TODO: 10/2/16 this list is not used anywhere 
     private List<String> movieImageUrls;
     private MovieAdapter movieAdapter;
 
@@ -192,14 +193,23 @@ public class MainFragment extends Fragment {
             List<MovieInfo> movieObjectList = new ArrayList<>();
             JSONObject moviesJson = new JSONObject(moviesJsonString);
             // results is the name of an array in Json String
+            // TODO: 10/2/16 Write constants for the following JSON attribute names.
             JSONArray results = moviesJson.getJSONArray("results");
             for (int i = 0; i < results.length(); i++) {
                 JSONObject poster = results.getJSONObject(i);
                 String relativeImageUrl = poster.getString("poster_path");
                 String movieId = poster.getString("id");
-                String
-                // TODO: 10/2/16 fix following. 
-                //movieObjectList.add(new MovieInfo(relativeImageUrl, movieId));
+                String overview = poster.getString("overview");
+                String releaseDate = poster.getString("release_date");
+                String originalTitle = poster.getString("original_title");
+                String voteAverage = poster.getString("vote_average");
+                movieObjectList.add(new MovieInfo(
+                        relativeImageUrl,
+                        movieId,
+                        overview,
+                        releaseDate,
+                        originalTitle,
+                        voteAverage));
             }
             return movieObjectList;
         }

@@ -16,7 +16,7 @@ public class MovieInfo implements Parcelable{
     // 281957 is the id here.
     private String movieId;
 
-    private String overView;
+    private String overview;
 
     private String releaseDate;
 
@@ -32,14 +32,14 @@ public class MovieInfo implements Parcelable{
      */
     public MovieInfo(String relativePosterPath,
                      String movieId,
-                     String overView,
+                     String overview,
                      String releaseDate,
                      String originalTitle,
                      String voteAverage) {
 
         fullPosterPath = convertToFullPath(relativePosterPath);
         this.movieId = movieId;
-        this.overView = overView;
+        this.overview = overview;
         this.releaseDate = releaseDate;
         this.originalTitle = originalTitle;
         this.voteAverage = voteAverage;
@@ -48,7 +48,7 @@ public class MovieInfo implements Parcelable{
     protected MovieInfo(Parcel in) {
         fullPosterPath = in.readString();
         movieId = in.readString();
-        overView = in.readString();
+        overview = in.readString();
         releaseDate = in.readString();
         originalTitle = in.readString();
         voteAverage = in.readString();
@@ -114,16 +114,16 @@ public class MovieInfo implements Parcelable{
         return releaseDate;
     }
 
-    public String getOverView() {
+    public String getOverview() {
 
-        return overView;
+        return overview;
     }
 
     @Override
     public String toString() {
         return "Full Poster path: " + fullPosterPath + "\n" +
                 "Movie ID: " + movieId + "\n" +
-                "Overview: " + overView + "\n" +
+                "Overview: " + overview + "\n" +
                 "Release Date: " + releaseDate + "\n" +
                 "Original Title: " + originalTitle + "\n" +
                 "Vote Average: " + voteAverage;
@@ -140,7 +140,7 @@ public class MovieInfo implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(fullPosterPath);
         dest.writeString(movieId);
-        dest.writeString(overView);
+        dest.writeString(overview);
         dest.writeString(releaseDate);
         dest.writeString(originalTitle);
         dest.writeString(voteAverage);
@@ -161,7 +161,7 @@ public class MovieInfo implements Parcelable{
         System.out.println(movieInfo.getMovieId());
         System.out.println(movieInfo.getFullPosterPath());
         System.out.println(movieInfo.getOriginalTitle());
-        System.out.println(movieInfo.getOverView());
+        System.out.println(movieInfo.getOverview());
         System.out.println(movieInfo.getReleaseDate());
         System.out.println(movieInfo.getVoteAverage());
     }
