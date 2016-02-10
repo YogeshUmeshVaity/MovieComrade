@@ -1,9 +1,12 @@
 package com.compmaestros.moviecomrade;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Represents the parameters about a movie retrieved from the API call to theMovieDB.
  */
-public class MovieInfo {
+public class MovieInfo implements Parcelable{
 
     // Complete url of the movie poster.
     private String fullPosterPath;
@@ -41,6 +44,28 @@ public class MovieInfo {
         this.originalTitle = originalTitle;
         this.voteAverage = voteAverage;
     }
+
+    protected MovieInfo(Parcel in) {
+        fullPosterPath = in.readString();
+        movieId = in.readString();
+        overView = in.readString();
+        releaseDate = in.readString();
+        originalTitle = in.readString();
+        voteAverage = in.readString();
+    }
+
+    /** Parcelable implementation. Read Creator documentation for more details. */
+    public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
+        @Override
+        public MovieInfo createFromParcel(Parcel in) {
+            return new MovieInfo(in);
+        }
+
+        @Override
+        public MovieInfo[] newArray(int size) {
+            return new MovieInfo[size];
+        }
+    };
 
     /**
      * API response provides a relative path to a movie poster image e.g.
@@ -104,6 +129,23 @@ public class MovieInfo {
                 "Vote Average: " + voteAverage;
     }
 
+    /** Necessary method for Parcelable */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /** Writes contents of the object to the parcel */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullPosterPath);
+        dest.writeString(movieId);
+        dest.writeString(overView);
+        dest.writeString(releaseDate);
+        dest.writeString(originalTitle);
+        dest.writeString(voteAverage);
+    }
+
     // TODO: Write a JUnit test class for this class.
     // Test this class
     public static void main(String[] args) {
@@ -122,7 +164,6 @@ public class MovieInfo {
         System.out.println(movieInfo.getOverView());
         System.out.println(movieInfo.getReleaseDate());
         System.out.println(movieInfo.getVoteAverage());
-
     }
 
 }
