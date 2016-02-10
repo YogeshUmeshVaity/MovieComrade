@@ -197,7 +197,8 @@ public class MainFragment extends Fragment {
                 JSONObject poster = results.getJSONObject(i);
                 String relativeImageUrl = poster.getString("poster_path");
                 String movieId = poster.getString("id");
-                movieObjectList.add(new MovieInfo(relativeImageUrl, movieId));
+                // TODO: 10/2/16 fix following. 
+                //movieObjectList.add(new MovieInfo(relativeImageUrl, movieId));
             }
             return movieObjectList;
         }

@@ -13,15 +13,33 @@ public class MovieInfo {
     // 281957 is the id here.
     private String movieId;
 
+    private String overView;
+
+    private String releaseDate;
+
+    private String originalTitle;
+
+    private String voteAverage;
+
     /**
      * Converts the relative poster path to complete url.
      * @param relativePosterPath is relative poster path retrieved from API call. It is in the form:
      *                           \/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
      * @param movieId movieId retrieved from Json String.
      */
-    public MovieInfo(String relativePosterPath, String movieId) {
+    public MovieInfo(String relativePosterPath,
+                     String movieId,
+                     String overView,
+                     String releaseDate,
+                     String originalTitle,
+                     String voteAverage) {
+
         fullPosterPath = convertToFullPath(relativePosterPath);
         this.movieId = movieId;
+        this.overView = overView;
+        this.releaseDate = releaseDate;
+        this.originalTitle = originalTitle;
+        this.voteAverage = voteAverage;
     }
 
     /**
@@ -57,10 +75,54 @@ public class MovieInfo {
         return movieId;
     }
 
+    public String getVoteAverage() {
+        return voteAverage;
+    }
+
+    public String getOriginalTitle() {
+
+        return originalTitle;
+    }
+
+    public String getReleaseDate() {
+
+        return releaseDate;
+    }
+
+    public String getOverView() {
+
+        return overView;
+    }
+
+    @Override
+    public String toString() {
+        return "Full Poster path: " + fullPosterPath + "\n" +
+                "Movie ID: " + movieId + "\n" +
+                "Overview: " + overView + "\n" +
+                "Release Date: " + releaseDate + "\n" +
+                "Original Title: " + originalTitle + "\n" +
+                "Vote Average: " + voteAverage;
+    }
+
+    // TODO: Write a JUnit test class for this class.
     // Test this class
     public static void main(String[] args) {
-        MovieInfo movieInfo = new MovieInfo("\\/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg", "281957");
-        System.out.println(movieInfo.getFullPosterPath());
+        MovieInfo movieInfo = new MovieInfo(
+                "\\/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg",
+                "281957",
+                "In the 1820s, a frontiersman, Hugh Glass, sets out on a path of vengeance against those who left him for dead after a bear mauling.",
+                "2015-12-25",
+                "The Revenant",
+                "7.28");
+        System.out.println(movieInfo);
+
         System.out.println(movieInfo.getMovieId());
+        System.out.println(movieInfo.getFullPosterPath());
+        System.out.println(movieInfo.getOriginalTitle());
+        System.out.println(movieInfo.getOverView());
+        System.out.println(movieInfo.getReleaseDate());
+        System.out.println(movieInfo.getVoteAverage());
+
     }
+
 }
