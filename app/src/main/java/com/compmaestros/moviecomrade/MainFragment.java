@@ -39,6 +39,7 @@ public class MainFragment extends Fragment {
 
 
     private static final String LOG_TAG = MainFragment.class.getSimpleName();
+    public static final String MOVIE_PARCEL = "com.compmaestros.moviecomrade.MOVIE_PARCEL";
     // TODO: 10/2/16 this list is not used anywhere 
     private List<String> movieImageUrls;
     private MovieAdapter movieAdapter;
@@ -68,7 +69,7 @@ public class MainFragment extends Fragment {
         movieGrids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                showMovieDetails();
+                showMovieDetails(position);
             }
         });
 
@@ -76,9 +77,14 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
-    /** Launches Details Activity to show details about the selected movie. */
-    private void showMovieDetails() {
+    /** Launches Details Activity to show details about the selected movie.
+     * @param position is the current position of the data item in ArrayAdapter on which the user
+     *                 clicked.
+     */
+    private void showMovieDetails(int position) {
+        MovieInfo movieInfo = movieAdapter.getItem(position);
         Intent detailsIntent = new Intent(getActivity(), DetailsActivity.class);
+        detailsIntent.putExtra(MainFragment.MOVIE_PARCEL, movieInfo);
         startActivity(detailsIntent);
     }
 
