@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -38,17 +39,19 @@ public class DetailsFragment extends Fragment {
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout =
                 (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-        //Log.d(LOG_TAG, appBarLayout.toString());
-        //if(appBarLayout != null) {
+        if(appBarLayout != null) {
             appBarLayout.setTitle(movieInfo.getOriginalTitle());
-        //}
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_details, container, false);
+        TextView movieOverview = (TextView) rootView.findViewById(R.id.movie_overview_text_view);
+        movieOverview.setText(movieInfo.getOverview());
+        return rootView;
     }
 
 }

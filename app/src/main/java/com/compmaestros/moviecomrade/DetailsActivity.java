@@ -31,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
             DetailsFragment detailsFragment = new DetailsFragment();
             detailsFragment.setArguments(movieData);
             getSupportFragmentManager().beginTransaction()
-                    .add(detailsFragment, "DetailsFragment").commit();
+                    .add(R.id.movie_detail_container, detailsFragment).commit();
         }
     }
 }
