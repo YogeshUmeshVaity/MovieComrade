@@ -204,6 +204,7 @@ public class MainFragment extends Fragment {
             for (int i = 0; i < results.length(); i++) {
                 JSONObject poster = results.getJSONObject(i);
                 String relativeImageUrl = poster.getString("poster_path");
+                String relativeBackdropUrl = poster.getString("backdrop_path");
                 String movieId = poster.getString("id");
                 String overview = poster.getString("overview");
                 String releaseDate = poster.getString("release_date");
@@ -211,6 +212,7 @@ public class MainFragment extends Fragment {
                 String voteAverage = poster.getString("vote_average");
                 movieObjectList.add(new MovieInfo(
                         relativeImageUrl,
+                        relativeBackdropUrl,
                         movieId,
                         overview,
                         releaseDate,

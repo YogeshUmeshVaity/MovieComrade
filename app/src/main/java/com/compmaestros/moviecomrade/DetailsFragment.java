@@ -51,6 +51,9 @@ public class DetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
 
+        ImageView backdropView = (ImageView) getActivity().findViewById(R.id.backdrop_image_view);
+        Picasso.with(getActivity()).load(movieInfo.getFullBackdropPath()).into(backdropView);
+
         ImageView posterView = (ImageView) rootView.findViewById(R.id.poster_image_view);
         Picasso.with(getContext()).load(movieInfo.getFullPosterPath()).into(posterView);
 

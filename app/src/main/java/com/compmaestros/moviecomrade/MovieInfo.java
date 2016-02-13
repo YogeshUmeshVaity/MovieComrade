@@ -6,10 +6,15 @@ import android.os.Parcelable;
 /**
  * Represents the parameters about a movie retrieved from the API call to theMovieDB.
  */
-public class MovieInfo implements Parcelable{
+public class MovieInfo implements Parcelable {
+
+    private static final String POSTER_IMAGE_SIZE = "w185";
+    private static final String BACKDROP_IMAGE_SIZE = "w342";
 
     // Complete url of the movie poster.
     private String fullPosterPath;
+
+    private String fullBackdropPath;
 
     // Id is used to retrieve more information about the movie.
     // Example: http://api.themoviedb.org/3/movie/281957/videos?api_key={API_KEY}
@@ -31,13 +36,15 @@ public class MovieInfo implements Parcelable{
      * @param movieId movieId retrieved from Json String.
      */
     public MovieInfo(String relativePosterPath,
+                     String relativeBackdropPath,
                      String movieId,
                      String overview,
                      String releaseDate,
                      String originalTitle,
                      String voteAverage) {
 
-        fullPosterPath = convertToFullPath(relativePosterPath);
+        fullPosterPath = convertToFullPath(relativePosterPath, POSTER_IMAGE_SIZE);
+        fullBackdropPath = convertToFullPath(relativeBackdropPath, BACKDROP_IMAGE_SIZE);
         this.movieId = movieId;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -47,6 +54,7 @@ public class MovieInfo implements Parcelable{
 
     protected MovieInfo(Parcel in) {
         fullPosterPath = in.readString();
+        fullBackdropPath = in.readString();
         movieId = in.readString();
         overview = in.readString();
         releaseDate = in.readString();
@@ -54,7 +62,22 @@ public class MovieInfo implements Parcelable{
         voteAverage = in.readString();
     }
 
-    /** Parcelable implementation. Read Creator documentation for more details. */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullPosterPath);
+        dest.writeString(fullBackdropPath);
+        dest.writeString(movieId);
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
+        dest.writeString(originalTitle);
+        dest.writeString(voteAverage);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
         @Override
         public MovieInfo createFromParcel(Parcel in) {
@@ -81,8 +104,9 @@ public class MovieInfo implements Parcelable{
      *
      * Back drop path: http://image.tmdb.org/t/p/w342//uETWtwsE1QjfoFqRQqFLnSjppPA.jpg
      */
-    private String convertToFullPath(String relativePosterPath) {
-        final String baseUrl = "http://image.tmdb.org/t/p/w185/";
+    private String convertToFullPath(String relativePosterPath, String imageSize) {
+        String baseUrl = "http://image.tmdb.org/t/p/";
+        baseUrl += imageSize + "/";
         String fullUrl = relativePosterPath.substring(1);
         fullUrl = baseUrl.concat(fullUrl);
         return fullUrl;
@@ -91,6 +115,11 @@ public class MovieInfo implements Parcelable{
     /** Returns full path to movie poster */
     public String getFullPosterPath() {
         return fullPosterPath;
+    }
+
+    /** Returns full backdrop path of the movie */
+    public String getFullBackdropPath() {
+        return fullBackdropPath;
     }
 
     /**
@@ -135,28 +164,12 @@ public class MovieInfo implements Parcelable{
                 "Vote Average: " + voteAverage;
     }
 
-    /** Necessary method for Parcelable */
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    /** Writes contents of the object to the parcel */
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(fullPosterPath);
-        dest.writeString(movieId);
-        dest.writeString(overview);
-        dest.writeString(releaseDate);
-        dest.writeString(originalTitle);
-        dest.writeString(voteAverage);
-    }
-
     // TODO: Write a JUnit test class for this class.
     // Test this class
     public static void main(String[] args) {
         MovieInfo movieInfo = new MovieInfo(
                 "\\/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg",
+                "\\/uETWtwsE1QjfoFqRQqFLnSjppPA.jpg",
                 "281957",
                 "In the 1820s, a frontiersman, Hugh Glass, sets out on a path of vengeance against those who left him for dead after a bear mauling.",
                 "2015-12-25",
@@ -165,6 +178,7 @@ public class MovieInfo implements Parcelable{
         System.out.println(movieInfo);
 
         System.out.println(movieInfo.getMovieId());
+        System.out.println(movieInfo.getFullBackdropPath());
         System.out.println(movieInfo.getFullPosterPath());
         System.out.println(movieInfo.getOriginalTitle());
         System.out.println(movieInfo.getOverview());
@@ -172,5 +186,4 @@ public class MovieInfo implements Parcelable{
         System.out.println(movieInfo.getVoteAverage());
         System.out.println(movieInfo.getReleaseYear());
     }
-
 }
