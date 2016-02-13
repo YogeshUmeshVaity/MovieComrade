@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
             app:contentScrim="@color/colorPrimary"
             android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -33,7 +34,7 @@
                 app:layout_collapseMode="pin"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/back_drop_sample" />
+                tools:src="@drawable/back_drop_sample" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/detail_toolbar"

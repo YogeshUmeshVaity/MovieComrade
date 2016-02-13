@@ -9,7 +9,7 @@ import android.os.Parcelable;
 public class MovieInfo implements Parcelable {
 
     private static final String POSTER_IMAGE_SIZE = "w185";
-    private static final String BACKDROP_IMAGE_SIZE = "w342";
+    private static final String BACKDROP_IMAGE_SIZE = "w500";
 
     // Complete url of the movie poster.
     private String fullPosterPath;
