@@ -1,10 +1,54 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_overview_text_view"
-    style="?android:attr/textAppearanceLarge"
+    tools:context=".DetailsFragment"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:text="ello"
-    android:textIsSelectable="true"
-    tools:context=".DetailsFragment" />
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/poster_image_view"
+            tools:src="@drawable/sample_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/release_date_text_view"
+                android:layout_width="wrap_content"
+                tools:text="2015"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/vote_average_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="9/10"/>
+
+            <Button
+                android:id="@+id/favorite_button"
+                android:text="@string/fovorite"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/movie_overview_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="In the 1820s, a frontiersman, Hugh Glass, sets out on a path of vengeance against those who left him for dead after a bear mauling."/>
+
+</LinearLayout>
+
+

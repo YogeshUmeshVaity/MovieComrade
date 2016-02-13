@@ -119,6 +119,10 @@ public class MovieInfo implements Parcelable{
         return overview;
     }
 
+    public String getReleaseYear() {
+        return releaseDate.substring(0, 4);
+    }
+
     @Override
     public String toString() {
         return "Full Poster path: " + fullPosterPath + "\n" +
@@ -164,6 +168,7 @@ public class MovieInfo implements Parcelable{
         System.out.println(movieInfo.getOverview());
         System.out.println(movieInfo.getReleaseDate());
         System.out.println(movieInfo.getVoteAverage());
+        System.out.println(movieInfo.getReleaseYear());
     }
 
 }
