@@ -78,6 +78,8 @@ public class MovieInfo implements Parcelable{
      * "w780", or "original". For most phones “w185” is recommended.
      * So resulting example image url that should be:
      * http://image.tmdb.org/t/p/w185//oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg
+     *
+     * Back drop path: http://image.tmdb.org/t/p/w342//uETWtwsE1QjfoFqRQqFLnSjppPA.jpg
      */
     private String convertToFullPath(String relativePosterPath) {
         final String baseUrl = "http://image.tmdb.org/t/p/w185/";
