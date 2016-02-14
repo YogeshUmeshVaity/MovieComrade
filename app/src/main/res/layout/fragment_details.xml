@@ -2,12 +2,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DetailsFragment"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- TODO: Remove the drawables that are for sample before publishing -->
+
     <LinearLayout
-        android:layout_width="match_parent"
+
+        android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
 
@@ -18,25 +24,33 @@
             android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/release_date_text_view"
                 android:layout_width="wrap_content"
                 tools:text="2015"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:layout_marginTop="16dp"
                 android:id="@+id/vote_average_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 tools:text="9/10"/>
 
             <Button
+                android:layout_marginTop="16dp"
                 android:id="@+id/favorite_button"
-                android:text="@string/fovorite"
-                android:textAllCaps="false"
+                android:text="@string/favorite"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
